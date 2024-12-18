@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 
 const Login = () => {
 
+    const [authUser, setAuthUser] = useAuth()
       const {
         register,
         handleSubmit,
@@ -24,6 +25,7 @@ const Login = () => {
               alert("logged In success full");
             }
             localStorage.setItem("Chatapp",JSON.stringify(response.data));
+            setAuthUser(response.data)
           })
           .catch((error) => {
             if (error.response) {

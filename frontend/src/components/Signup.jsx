@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useAuth } from "../context/AuthProvider";
 
 const Signup = () => {
+    const [authUser, setAuthUser] = useAuth()
+
   const {
     register,
     handleSubmit,
@@ -16,20 +19,21 @@ const Signup = () => {
   const validatePassworMatch = (value) => {
     return value === password || "password do not match";
   };
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const userInfo = {
       fullName: data.fullName,
       email: data.email,
       password: data.password,
       confirmPassword: data.confirmPassword,
     };
-    axios
+    await axios
       .post("http://localhost:4000/users/signup", userInfo)
       .then((response) => {
         if (response.data) {
           alert("signup success full");
         }
-        localStorage.setItem("Chatapp",JSON.stringify(response.data));
+        localStorage.setItem("ChatApp",JSON.stringify(response.data));
+        setAuthUser(response.data)
       })
       .catch((error) => {
         if (error.response) {
