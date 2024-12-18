@@ -29,7 +29,13 @@ export const SignUp = async (req, res) => {
         newUser.save()
         if(newUser) {
             genrateTokenAndCookies(newUser._id, res)
-            res.status(200).json({ message : "User Created Successfully", newUser})
+            res.status(200).json({ message : "User Created Successfully",
+                user: {
+                    _id: newUser._id,
+                    fullName: newUser.fullName,
+                    email: newUser.email
+                }
+            })
         }
         
     } catch (error) {
