@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAuth } from "../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
     const [authUser, setAuthUser] = useAuth()
@@ -112,9 +113,9 @@ const Signup = () => {
 
           <div className="flex justify-between">
             <p className="text-slate-400">Have an account ? </p>
-            <span className="text-blue-600 underline cursor-pointer hover:text-blue-700">
+            <Link to= "/login" className="text-blue-600 underline cursor-pointer hover:text-blue-700">
               Login
-            </span>
+            </Link>
             <button
               type="submit"
               value="Signup"
